@@ -34,7 +34,9 @@ get_index <- function(vector, entry){
 print.lm <- function(mod){
     intercept_index <- get_index(attr(mod$coefficients, "names"), "(Intercept)")
     xvar <- attr(mod$xlevels, "names") # (for example, "Sex")
-    levels <- eval(parse(text=paste("mod$xlevels$", xvar[1], sep="")))
+    if(!is.null(xvar)){
+        levels <- eval(parse(text=paste("mod$xlevels$", xvar[1], sep="")))
+    }
     formula <- paste("Y_i =", mod$coefficients[intercept_index])
     desc <- list()
     k <- 1
